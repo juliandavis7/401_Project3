@@ -14,7 +14,7 @@ def inplace_relu(X):
 ACTIVATIONS = {'relu': inplace_relu}
 
 # DERIVATIVE OF ACTIVATION FUNCTIONS
-def inplace_relu_derivative(Z, delta):
+def inplace_relu_derivative(Z, J):
     """Apply the derivative of the relu function.
     It exploits the fact that the derivative is a simple function of the output
     value from rectified linear units activation function.
@@ -26,7 +26,7 @@ def inplace_relu_derivative(Z, delta):
     delta : {array-like}, shape (n_samples, n_features)
          The backpropagated error signal to be modified inplace.
     """
-    delta[Z == 0] = 0
+    J[Z == 0] = 0
     
 DERIVATIVES = {'relu': inplace_relu_derivative}
 
@@ -47,5 +47,6 @@ def squared_loss(y_true, y_pred):
         return ((y_true - y_pred) ** 2).mean() / 2
     
 # DERIVATIVE OF LOSS FUNCTIONS
-def sqaured_loss_derivative(self, y_pred, y_true, batch_size):
+def squared_loss_derivative(y_pred, y_true, batch_size):
     return (y_pred - y_true)/batch_size
+
